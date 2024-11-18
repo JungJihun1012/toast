@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    ul,li {
+        list-style: none;
+    }
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+    .logo {
+        line-height: 0;
+    }
+    .container {
+        background-color: #fadfc0;
+    }
+    header {
+        display: flex;
+        align-items: center;
+        padding: 21px 0 19px;
+        width: 1080px;
+        margin: 0 auto;
+    }
+    .Header_Link {
+        margin-left: 24px;
+    }
+    .Header_Link .Header_li {
+        display: inline-block;
+        margin-bottom: -19px;
+        padding-bottom: 18px;
+        border-bottom: 2px solid transparent;
+        vertical-align: top;
+    }
+    .Header_Link .Header_a {
+        display: block;
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 23px;
+        color: #929294;
+    }
+    .Header_Right {
+        display: flex;
+        justify-content: end;
+        width: 700px;
+    }
+    .Header_Right  button {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 10px 20px;
+        border-radius: 5px;
+        margin-right: 10px;
+    }
+    .login > .login-btn {
+        background-color: #776d61;
+    }
+    .register > .register-btn {
+        background-color: #f8d5ab;
+    }
+    .content {
+        background-color: peachpuff;
+        width: 99.1157vw;
+        height: 94.27vh;
+
+    }
+</style>
+<div class="container">
+    <header>
+        <div class="logo">
+            <a href="#" class="logo-naver-image">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M22 11C22 13.1756 21.3549 15.3023 20.1462 17.1113C18.9375 18.9202 17.2195 20.3301 15.2095 21.1627C13.1995 21.9952 10.9878 22.2131 8.85401 21.7886C6.72022 21.3642 4.76021 20.3166 3.22183 18.7782C1.68345 17.2398 0.635805 15.2798 0.211368 13.146C-0.213069 11.0122 0.00476301 8.80047 0.837327 6.79048C1.66989 4.78049 3.07979 3.06253 4.88873 1.85383C6.69767 0.645137 8.82441 0 11 0C13.9174 0 16.7153 1.15892 18.7782 3.22183C20.8411 5.28473 22 8.08262 22 11ZM12.8398 5.83V11.3602L8.98976 5.83H5.83V16.1838H9.1575V10.637L13.0075 16.17H16.1783V5.83H12.8398Z" fill="#000"></path>
+                </svg>
+            </a>
+            <a href="#" class="logo-naver-image-pay">
+                <svg width="37" height="22" viewBox="0 0 39 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M34.4319 5.21944L31.3913 12.1478L27.9518 5.21944H25.3072L30.1783 14.8317L28.1703 19.3358H30.7384L37 5.2331L34.4319 5.21944ZM23.6171 15.9331H21.1037V14.9328C20.1894 15.7342 19.0108 16.1685 17.7953 16.1518C14.7901 16.1518 12.4379 13.692 12.4379 10.5763C12.4379 7.46057 14.7874 5.00079 17.7953 5.00079C19.0104 4.9833 20.189 5.41657 21.1037 6.21701V5.21944H23.6171V15.9331ZM21.3987 10.5899C21.3987 8.57019 19.9891 7.03694 18.1204 7.03694C16.2517 7.03694 14.842 8.57019 14.842 10.5899C14.842 12.6097 16.249 14.1429 18.1204 14.1429C19.9918 14.1429 21.3987 12.596 21.3987 10.5899ZM0.00819554 19.3358H2.63088V15.023C3.52823 15.7695 4.66309 16.1699 5.83001 16.1518C8.83516 16.1518 11.1901 13.692 11.1901 10.5763C11.1901 7.46057 8.83789 5.00079 5.83001 5.00079C4.61166 4.9789 3.42899 5.4126 2.51341 6.21701V5.21944H0L0.00819554 19.3358ZM5.51856 7.03694C7.38722 7.03694 8.79691 8.57019 8.79691 10.5899C8.79691 12.6097 7.38722 14.1429 5.51856 14.1429C3.6499 14.1429 2.24021 12.6097 2.24021 10.5899C2.24021 8.57019 3.63351 7.03694 5.51856 7.03694Z" fill="#000"></path>
+                </svg>
+            </a>
+        </div>
+        <ul class="Header_Link">
+            <li class="Header_li Header_Current_Clicked"><a href="#" class="Header_a">결제내역</a></li>
+            <li class="Header_li"><a href="#" class="Header_a">혜택</a></li>
+        </ul>
+        <div class="Header_Right">
+            <div class="login">
+                <button class="login-btn">로그인</button>
+            </div>
+            <div class="register">
+                <button class="register-btn">회원가입</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="content">
+        <h2 th:text="|안녕하세요,${user.getUserName()}님 |"></h2>
+    </div>
+</div>
+
+<script>
+
+    const isCurrentIdx = document.querySelector(".Header_Current_Clicked");
+
+    const handleClicked = (e) => {
+        if(isCurrentIdx) {
+            e.classList.add("Header_Current_Clicked");
+        } else {
+            e.classList.remove("Header_Current_Clicked");
+        }
+    }
+
+    isCurrentIdx.addEventListener("click", () => {
+        handleClicked();
+    })
+
+</script>
+</body>
+</html>

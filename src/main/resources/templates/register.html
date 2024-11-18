@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    ul,li {
+        list-style: none;
+    }
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+    .container {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        background-color: #fadfc0;
+        align-items: center;
+    }
+    .register-form {
+        display: flex;
+    }
+    .content {
+        display: flex;
+        flex-direction: column;
+    }
+    .register {
+        display: flex;
+        flex-direction: column;
+    }
+    .register > input {
+        padding: 12px;
+        width: 300px;
+        outline: none;
+        border: none;
+    }
+    .content > h3 {
+        text-align: center;
+        font-size: 25px;
+        padding-bottom: 15px;
+        color: #776d61;
+    }
+    .register > span {
+        padding-top: 0.8rem;
+        padding-bottom: 0.5rem;
+        font-size: 15px;
+        color: #776d61;
+    }
+    .register-btn {
+        margin-top: 20px;
+        text-align: center;
+        border: 1px solid #f8d0a1;
+        background-color: #f8d0a1;
+        width: 150px;
+        padding: 9px;
+        position: relative;
+        left: 75px;
+        color: #776d61;
+    }
+    .register-btn:hover {
+        background-color: #f8d5ab;
+        color: #554e41;
+        transition: .5s;
+        border-radius: 5px;
+    }
+    .register-btn > input {
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        font-size: 15px;
+        color: #554e41;
+    }
+</style>
+<body>
+<div class="container">
+  <form action="/register-user" method="post" class="register-form">
+    <div class="content">
+        <h3>회원가입</h3>
+      <div class="register-id register">
+          <span>username</span>
+          <input name="userId" type="text" placeholder="아이디를 입력해주세요" required>
+      </div>
+        <div class="register-password register">
+            <span>password</span>
+            <input name="userPassword" type="password" placeholder="비밀번호를 입력해주세요">
+        </div>
+        <div class="register-name register">
+            <span>name</span>
+            <input name="userName" type="text" placeholder="이름을 입력해주세요">
+        </div>
+        <div class="register-email register">
+            <span>email</span>
+            <input name="userEmail" type="email" placeholder="이메일을 입력해주세요">
+        </div>
+        <div class="register-contact register">
+            <span>contact</span>
+            <input name="userContact" type="text" placeholder="전화번호를 입력해주세요">
+        </div>
+        <div class="register-address register">
+            <span>address</span>
+            <input name="userAddress" type="text" placeholder="주소를 입력해주세요">
+        </div>
+        <div class="register-btn">
+            <input type="submit" value="회원가입">
+        </div>
+    </div>
+  </form>
+</div>
+</body>
+</html>
