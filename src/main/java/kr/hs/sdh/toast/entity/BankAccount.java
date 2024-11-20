@@ -1,52 +1,136 @@
 package kr.hs.sdh.toast.entity;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
-public class BankAccount {
+/**
+ * 'BANK_ACCOUNT' 테이블의 데이터를 담는 클래스
+ *
+ * @since 2023-11-18
+ * @version 0.0.1
+ */
+public final class BankAccount {
 
-    private final String ba_uuid;
-    private final String ba_name;
-    private final LocalDateTime ba_reg_st_date;
-    private final LocalDateTime ba_reg_ed_date;
-    private final boolean ba_withdrawal;
-    private final String bk_uuid;
-    private final String bc_uuid;
+    /**
+     * 계좌 번호 (Mapped to 'BANK_ACCOUNT.ba_number')
+     */
+    private final String number;
 
-    public BankAccount(String ba_uuid, String ba_name, LocalDateTime ba_reg_st_date, LocalDateTime ba_reg_ed_date, boolean ba_withdrawal, String bk_uuid, String bc_uuid) {
-        this.ba_uuid = ba_uuid;
-        this.ba_name = ba_name;
-        this.ba_reg_st_date = ba_reg_st_date;
-        this.ba_reg_ed_date = ba_reg_ed_date;
-        this.ba_withdrawal = ba_withdrawal;
-        this.bk_uuid = bk_uuid;
-        this.bc_uuid = bc_uuid;
+    /**
+     * 계좌 금액 (Mapped to 'BANK_ACCOUNT.ba_amount')
+     */
+    private final long amount;
+
+    /**
+     * 계좌 별칭 (Mapped to 'BANK_ACCOUNT.ba_alias')
+     */
+    private final String alias;
+
+    /**
+     * 계좌 생성일자 (Mapped to 'BANK_ACCOUNT.ba_create_date')
+     */
+    private final LocalDateTime createDateTime;
+
+    /**
+     * 계좌 만기일자 (Mapped to 'BANK_ACCOUNT.ba_maturity_date')
+     */
+    private final LocalDateTime maturityDateTime;
+
+    /**
+     * 계좌 동결 여부 (Mapped to 'BANK_ACCOUNT.ba_freeze')
+     */
+    private final boolean isFreeze;
+
+    /**
+     * 통장 테이블 (Mapped to 'BANK_BOOK')*/
+
+    private BankBook bankBook;
+
+    private Set<BankACcountHistory> bankAccountHistory;
+
+    /**
+     * {@link BankAccount} 클래스의 생성자
+     * 
+     * @param number 계좌 번호
+     * @param amount 계좌 금액
+     * @param alias 계좌 별칭
+     * @param createDateTime 계좌 생성일자
+     * @param maturityDateTime 계좌 만기일자
+     * @param isFreeze 계좌 동결 여부
+     */
+    public BankAccount(
+        final String number,
+        final long amount,
+        final String alias,
+        final LocalDateTime createDateTime,
+        final LocalDateTime maturityDateTime,
+        final boolean isFreeze
+    ) {
+        this.number = number;
+        this.amount = amount;
+        this.alias = alias;
+        this.createDateTime = createDateTime;
+        this.maturityDateTime = maturityDateTime;
+        this.isFreeze = isFreeze;
     }
 
-    public String getBa_uuid() {
-        return ba_uuid;
+    public boolean isFreeze() {
+        return isFreeze;
     }
 
-    public String getBa_name() {
-        return ba_name;
+    public LocalDateTime getMaturityDateTime() {
+        return maturityDateTime;
     }
 
-    public LocalDateTime getBa_reg_st_date() {
-        return ba_reg_st_date;
+    public LocalDateTime getCreateDateTime() {
+        return createDateTime;
     }
 
-    public LocalDateTime getBa_reg_ed_date() {
-        return ba_reg_ed_date;
+    public String getAlias() {
+        return alias;
     }
 
-    public boolean isBa_withdrawal() {
-        return ba_withdrawal;
+    public long getAmount() {
+        return amount;
     }
 
-    public String getBk_uuid() {
-        return bk_uuid;
+    public String getNumber() {
+        return number;
     }
 
-    public String getBc_uuid() {
-        return bc_uuid;
+    public void setBankBook(BankBook bankBook) {
+        this.bankBook = bankBook;
+    }
+
+    public void setBankAccountHistory(Set<BankACcountHistory> bankAccountHistory) {
+        this.bankAccountHistory = bankAccountHistory;
+    }
+
+    @Override
+    public boolean equals(final Object object) {
+        if (object != null) {
+            if (this == object) {
+                return true;
+            }
+
+            if (object instanceof final BankAccount bankAccount) {
+                return this.number.contentEquals(bankAccount.number);
+            }
+        }
+
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return this.number.hashCode();
+    }
+
+    public BankBook getBankBook() {
+        return bankBook;
+    }
+
+    public Set<BankACcountHistory> getBankAccountHistory() {
+        return bankAccountHistory;
     }
 }

@@ -1,27 +1,29 @@
 package kr.hs.sdh.toast.config;
 
-import com.mysql.cj.protocol.AuthenticationProvider;
-import kr.hs.sdh.toast.entity.User;
-import kr.hs.sdh.toast.provider.AccountAthenticationProvider;
+import kr.hs.sdh.toast.entity.BankAccount;
+import kr.hs.sdh.toast.entity.Customer;
+import kr.hs.sdh.toast.model.CustomerDetails;
+import kr.hs.sdh.toast.repository.BankAccountRepository;
 import kr.hs.sdh.toast.repository.UserRepository;
-import kr.hs.sdh.toast.service.UserService;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import java.util.Set;
+import java.util.List;
 
 @Configuration
 public class SecurityConfiguration {
 
     private final UserRepository userRepository;
+    private final BankAccountRepository bankAccountRepository;
 
-    public SecurityConfiguration(UserRepository userRepository) {
+    public SecurityConfiguration(UserRepository userRepository, BankAccountRepository bankAccountRepository) {
         this.userRepository = userRepository;
+        this.bankAccountRepository = bankAccountRepository;
     }
 
     @Bean
@@ -35,21 +37,22 @@ public class SecurityConfiguration {
                 .formLogin(
                         config ->
                                 config.loginPage("/login")
-                                        .loginProcessingUrl("/user")
-                                        .defaultSuccessUrl("/login")
-                                        .usernameParameter("userId")
-                                        .passwordParameter("userPassword")
+                                    .loginProcessingUrl("/user")
+                                    .defaultSuccessUrl("/index ")
+                                    .usernameParameter("userId")
+                                    .passwordParameter("userPassword")
                 )
                 .userDetailsService(userid -> {
-                    User user = this.userRepository.findById(userid);
+                    final Customer customer = this.userRepository.findById(userid);
 
-                    if(userid == null) {
+                    if(customer == null) {
                         throw new UsernameNotFoundException("User not found");
                     }
+                    final String identity = customer.getPeople().getIdentity();
+                    final List<BankAccount> account = this.bankAccountRepository.findAllByIdentity(identity);
 
-                    return org.springframework.security.core.userdetails.User.withUsername(user.getUserId())
-                            .password(user.getUserPassword())
-                            .build();
+                    return new CustomerDetails(customer, account);
+
                 })
                 .build();
     }

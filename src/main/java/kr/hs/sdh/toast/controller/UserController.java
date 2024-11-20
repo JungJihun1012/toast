@@ -1,8 +1,9 @@
 package kr.hs.sdh.toast.controller;
 
-import kr.hs.sdh.toast.entity.User;
+import kr.hs.sdh.toast.model.CustomerDetails;
 import kr.hs.sdh.toast.service.UserService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +23,7 @@ public class UserController {
     private String registerPage() {return "register";}
 
     @GetMapping(value = "/index")
-    private String index(@AuthenticationPrincipal User user, Model model) {
+    private String index(@AuthenticationPrincipal CustomerDetails user, Model model) {
         model.addAttribute("user", user);
 
         return "index";
